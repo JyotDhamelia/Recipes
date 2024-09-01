@@ -2,14 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-section{
-    background-image: url(/back.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    min-width: 90vw;
-}
 h1 {
     -webkit-text-stroke: 2px #f9f9f9; 
+}
+
+body{
+    background-color: rgb(236 254 255);
 }
