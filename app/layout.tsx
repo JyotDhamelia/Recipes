@@ -5,7 +5,7 @@ import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
-import "@/styles/globals.css";
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -32,23 +32,31 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
-        className={clsx("min-h-screen bg-green-100", fontSans.variable)}
+        className={clsx(
+          "min-h-screen flex flex-col bg-green-50 text-gray-800",
+          fontSans.variable
+        )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen bg-green-100">
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+          <div className="flex flex-col min-h-screen">
+            <main className="flex-grow flex flex-col justify-center px-4 py-6 sm:px-8 md:py-12 lg:px-16 max-w-7xl mx-auto">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
-              <Link
-                isExternal
-                className="flex items-center gap-1 text-current"
-                href="https://github.com/ninadvyas/All-Recipe"
-                title="nextui.org homepage"
-              >
-                <span className="text-green-600">Made By</span>
-                <p className="text-green-800">Ninad Vyas</p>
-              </Link>
+            <footer className="w-full bg-green-700 text-white py-4 mt-auto">
+              <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between px-4">
+                <p className="text-sm text-center sm:text-left">
+                  &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+                </p>
+                <Link
+                  isExternal
+                  className="flex items-center gap-2 mt-2 sm:mt-0 text-green-200 hover:text-white transition-colors"
+                  href="https://github.com/ninadvyas/All-Recipe"
+                  title="GitHub Repository"
+                >
+                  <span>Made By</span>
+                  <p className="font-semibold">Ninad Vyas</p>
+                </Link>
+              </div>
             </footer>
           </div>
         </Providers>

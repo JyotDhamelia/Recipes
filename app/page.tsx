@@ -33,7 +33,7 @@ export default function Example() {
   };
 
   return (
-    <div className="bg-green-100">
+    <div className="bg-green-50">
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -76,7 +76,7 @@ export default function Example() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search for a recipe..."
-                className="px-4 py-2 border border-green-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="px-4 py-2 text-white border border-green-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
               />
               <button
                 type="submit"
