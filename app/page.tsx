@@ -1,16 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog } from "@headlessui/react";
 import parse from "html-react-parser";
 
-export default function Example() {
+export default function RecipeSearch() {
   const [searchQuery, setSearchQuery] = useState("");
   const [recipeResult, setRecipeResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSearch = async (e: React.FormEvent) => {
+  const isValidDishSearch = (query: string): boolean => {
+    const commonDishes = [
+      "soup", "cake", "pasta", "bread", "salad", "stew", "curry", "pizza", 
+      "burger", "taco", "pie", "sandwich", "sushi", "noodles", "quiche", 
+      "risotto", "lasagna", "omelette", "pancakes", "waffles", "chili", 
+      "casserole", "frittata", "samosa", "biryani", "falafel", "dim sum", 
+      "sashimi", "ramen", "pad thai", "ceviche", "pesto", "guacamole", 
+      "tiramisu", "brownies", "cheesecake", "crème brûlée", "scone", 
+      "croissant", "bagel", "doughnut", "pudding", "mousse", "tart", 
+      "pasta primavera", "gnocchi", "coq au vin", "beef stew", "chicken curry", 
+      "fish tacos", "vegetable stir fry", "stuffed peppers", "meatballs", 
+      "shepherd's pie", "moussaka", "ratatouille", "fajitas", "spring rolls", 
+      "empanadas", "pot pie", "jambalaya", "chowder", "quiche Lorraine", 
+      "kebab", "paella", "sushi rolls", "poke bowl", "bbq ribs", "tandoori chicken", 
+      "bruschetta", "caprese salad", "coleslaw", "hummus", "tabbouleh", 
+      "deviled eggs", "chicken nuggets", "fish and chips", "buffalo wings", 
+      "bangers and mash", "crabcakes", "pork chops", "stuffed mushrooms", 
+      "baked ziti", "potato salad", "Greek salad", "carpaccio", "cabbage rolls", 
+      "goulash", "pork tenderloin", "shrimp scampi", "fettuccine alfredo", 
+      "lasagna bolognese", "vegetable lasagna", "chicken parmesan", 
+      "chicken Alfredo", "margarita pizza", "pork belly", "brisket", 
+      "smoked salmon", "tuna tartare", "charcuterie board", "taco salad", 
+      "croutons", "potato skins", "quesadilla", "mole", "chili con carne"
+      // Add more as needed
+    ];
+    
+    const lowerCaseQuery = query.toLowerCase();
+    return commonDishes.some(dish => lowerCaseQuery.includes(dish));
+  };
+
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Check if the query is valid based on common food-related patterns
+    if (!isValidDishSearch(searchQuery)) {
+      setRecipeResult("Please search for a valid dish.");
+      return;
+    }
+
     setIsLoading(true);
     try {
       const response = await fetch("/api/search-recipe", {
@@ -103,18 +139,6 @@ export default function Example() {
               </div>
             )}
           </div>
-        </div>
-        <div
-          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-          />
         </div>
       </div>
     </div>
